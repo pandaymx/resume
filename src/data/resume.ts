@@ -1,5 +1,5 @@
 import { 
-  MapPin, Phone, Mail, Github, Globe
+  MapPin, Phone, Mail, GithubIcon, Globe
 } from 'lucide-react';
 
 export const profile = {
@@ -10,7 +10,7 @@ export const profile = {
     { icon: Phone, value: "138-0000-8888" },
     { icon: Mail, value: "david.zhang@example.com" },
     { icon: MapPin, value: "中国, 北京 / 可远程" },
-    { icon: Github, value: "github.com/davidjava", link: "https://github.com/davidjava" },
+    { icon: GithubIcon, value: "github.com/davidjava", link: "https://github.com/davidjava" },
     { icon: Globe, value: "tech-blog.com", link: "https://tech-blog.com" },
   ]
 };
