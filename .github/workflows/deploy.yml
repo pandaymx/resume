@@ -32,6 +32,10 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        with:
+          # Automatically configure Pages if not set (requires appropriate permissions)
+          # Alternatively, you can configure GitHub Pages in Repository Settings -> Pages
+          enablement: false
 
       - name: Install dependencies
         run: bun install

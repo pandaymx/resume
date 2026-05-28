@@ -32,7 +32,8 @@ const App: React.FC = () => {
           <Sidebar 
             skills={data.skills} 
             education={data.education} 
-            languages={data.languages} 
+            languages={data.languages}
+            evaluation={data.evaluation}
           />
           
           <MainContent 
