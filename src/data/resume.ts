@@ -3,14 +3,14 @@ import {
 } from 'lucide-react';
 
 export const profile = {
-  name: "张伟 (David)",
+  name: "杨明瑄",
   title: "资深 Java 开发工程师",
-  summary: "拥有 5 年大型分布式系统开发经验。专注于高并发、高可用架构设计。深入理解 JVM 原理与性能调优。",
+  summary: "拥有 3 年大型分布式系统开发经验。专注于高并发、高可用架构设计。深入理解 JVM 原理与性能调优。",
   contact: [
     { icon: Phone, value: "138-0000-8888" },
     { icon: Mail, value: "david.zhang@example.com" },
-    { icon: MapPin, value: "中国, 北京 / 可远程" },
-    { icon: GithubIcon, value: "github.com/davidjava", link: "https://github.com/davidjava" },
+    { icon: MapPin, value: "中国, 西安 / 可远程" },
+    { icon: GithubIcon, value: "github.com/pandaymx", link: "https://github.com/pandaymx" },
     { icon: Globe, value: "tech-blog.com", link: "https://tech-blog.com" },
   ]
 };
@@ -27,6 +27,14 @@ export const skills = [
   {
     category: "DevOps & 工具",
     items: ["Docker", "K8s", "Git", "Maven", "Jenkins"]
+  },
+  {
+    category: "AI 技术",
+    items: [
+      "熟练使用 Ollama 本地部署及测试多种开源大模型",
+      "熟悉 Gemini/Claude 等主流大模型 API 的集成与应用开发",
+      "习惯使用 Cursor、Claude Code 等 AI 辅助编程工具提升开发效率"
+    ]
   }
 ];
 
@@ -46,7 +54,7 @@ export const experience = [
   {
     role: "高级 Java 开发工程师",
     company: "某知名互联网金融公司",
-    time: "2021.06 - 至今",
+    time: "2023.06 - 至今",
     color: "blue", // 装饰点颜色
     details: [
       "微服务架构重构：主导核心交易系统从单体向 Spring Cloud 微服务架构的迁移，拆分 8 个子系统，吞吐量提升 300%。",
@@ -58,7 +66,7 @@ export const experience = [
   {
     role: "Java 开发工程师",
     company: "某科技创新企业",
-    time: "2019.07 - 2021.05",
+    time: "2021.07 - 2023.05",
     color: "gray",
     details: [
       "负责企业级 SaaS 管理平台的后端 API 开发。",
@@ -67,6 +75,8 @@ export const experience = [
     ]
   }
 ];
+
+export const evaluation = "性格开朗，对待技术充满热情，具备良好的学习能力和解决复杂问题的执行力，抗压能力强，乐于团队协作。";
 
 export const projects = [
   {

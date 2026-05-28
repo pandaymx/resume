@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, GraduationCap, Globe } from 'lucide-react';
+import { Code, GraduationCap, Globe, UserCheck } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
 interface SkillGroup {
@@ -23,9 +23,10 @@ interface SidebarProps {
   skills: SkillGroup[];
   education: Education;
   languages: Language[];
+  evaluation?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages }) => {
+const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages, evaluation }) => {
   return (
     <aside className="bg-slate-50 w-full md:w-1/3 p-6 border-r border-slate-200 print:w-1/3 print:bg-slate-50">
       
@@ -77,6 +78,16 @@ const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages }) => {
           ))}
         </ul>
       </section>
+
+      {/* 个人评价 */}
+      {evaluation && (
+        <section className="mt-8">
+          <SectionTitle icon={UserCheck} title="个人评价" />
+          <p className="text-sm text-slate-700 leading-relaxed">
+            {evaluation}
+          </p>
+        </section>
+      )}
     </aside>
   );
 };
