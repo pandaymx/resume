@@ -1,0 +1,21 @@
+services:
+  resume-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resume-dev
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules # Do not override container's node_modules with local environment
+    ports:
+      - "5174:5173"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - resume-network
+
+networks:
+  resume-network:
+    name: resume-network
+    driver: bridge
