@@ -1,31 +1,104 @@
-import React from 'react';
-import { Download } from 'lucide-react';
+import React, { useState } from 'react';
+import { Download, Brain, X } from 'lucide-react';
 
-// 导入数据
+// Import data
 import * as data from './data/resume';
 
-// 导入拆分的组件
+// Import split components
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import Header from './components/Header';
 
 const App: React.FC = () => {
+  const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
 
+  // Custom light-weight markdown parser for rendering raw md strings with Tailwind styling
+  const renderMarkdown = (text: any) => {
+    // Safe extraction: handle cases where Vite imports raw files as ES modules { default: string }
+    const markdownString = typeof text === 'string' 
+      ? text 
+      : (text && typeof text === 'object' && 'default' in text ? text.default : '');
+
+    if (!markdownString || typeof markdownString !== 'string') {
+      return <p className="text-slate-500 text-sm">正在加载数据或数据格式错误...</p>;
+    }
+
+    return markdownString.split('\n').map((line, i) => {
+      const trimmed = line.trim();
+      
+      // Top Heading
+      if (trimmed.startsWith('# ')) {
+        return (
+          <h1 key={i} className="text-2xl font-bold mt-6 mb-3 text-slate-800 border-b pb-2 border-slate-200">
+            {trimmed.replace('# ', '')}
+          </h1>
+        );
+      }
+      
+      // Section Heading
+      if (trimmed.startsWith('## ')) {
+        return (
+          <h2 key={i} className="text-lg font-bold mt-5 mb-2 text-slate-800 flex items-center gap-2">
+            <span className="w-1.5 h-5 bg-blue-500 rounded-full inline-block"></span>
+            {trimmed.replace('## ', '')}
+          </h2>
+        );
+      }
+      
+      // List items
+      if (trimmed.startsWith('- ')) {
+        return (
+          <li key={i} className="ml-5 list-disc text-slate-600 my-1 leading-relaxed text-sm">
+            {trimmed.replace('- ', '')}
+          </li>
+        );
+      }
+      
+      // Horizontal Rule
+      if (trimmed.startsWith('---')) {
+        return <hr key={i} className="my-5 border-slate-200" />;
+      }
+      
+      // Empty Lines
+      if (trimmed === '') {
+        return <div key={i} className="h-2" />;
+      }
+      
+      // Paragraphs
+      return (
+        <p key={i} className="text-slate-600 my-1.5 leading-relaxed text-sm">
+          {trimmed}
+        </p>
+      );
+    });
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans print:p-0 print:bg-white">
-      {/* 悬浮下载按钮 */}
-      <button 
-        onClick={handlePrint}
-        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 print:hidden z-50 cursor-pointer"
-      >
-        <Download size={20} />
-        下载 / 打印 PDF
-      </button>
+    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans print:p-0 print:bg-white relative">
+      {/* 悬浮按钮组 */}
+      <div className="fixed bottom-8 right-8 flex gap-4 print:hidden z-40">
+        {/* AI 记忆按钮 */}
+        <button 
+          onClick={() => setIsMemoryOpen(true)}
+          className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 cursor-pointer border border-slate-700/50 backdrop-blur-sm"
+        >
+          <Brain size={20} className="text-blue-400" />
+          AI 记忆库
+        </button>
+
+        {/* 下载/打印 PDF 按钮 */}
+        <button 
+          onClick={handlePrint}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 cursor-pointer"
+        >
+          <Download size={20} />
+          下载 / 打印 PDF
+        </button>
+      </div>
 
       {/* 简历容器 */}
       <div className="max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none">
-        
         <Header profile={data.profile} />
 
         <div className="flex flex-col md:flex-row print:flex-row">
@@ -42,6 +115,47 @@ const App: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* AI 记忆库弹窗 (Modal) */}
+      {isMemoryOpen && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in print:hidden">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden border border-slate-100 animate-scale-up">
+            {/* 弹窗头部 */}
+            <div className="bg-slate-800 text-white p-5 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <Brain className="text-blue-400" size={24} />
+                <div>
+                  <h3 className="font-bold text-lg leading-tight">AI 记忆库 / Context</h3>
+                  <p className="text-xs text-slate-400 leading-normal">面试官与 AI 代理专用深度上下文</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsMemoryOpen(false)}
+                className="hover:bg-slate-700/60 p-2 rounded-full transition-colors cursor-pointer text-slate-300 hover:text-white"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* 弹窗主体 (Markdown 内容) */}
+            <div className="flex-1 p-6 overflow-y-auto bg-slate-50/50">
+              <article className="prose max-w-none">
+                {renderMarkdown(data.aiMemory)}
+              </article>
+            </div>
+
+            {/* 弹窗底部 */}
+            <div className="bg-slate-100 p-4 border-t border-slate-200/50 flex justify-end">
+              <button 
+                onClick={() => setIsMemoryOpen(false)}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors cursor-pointer text-sm"
+              >
+                我知道了
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
