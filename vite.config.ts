@@ -35,7 +35,7 @@ export default defineConfig(({ mode }: { mode: string }) => {
     plugins: [react(), tailwindcss()],
     base: "./", // Use relative paths for GitHub Pages
     server: {
-      allowedHosts: true, // Allow all hosts inside the development container proxy
+      allowedHosts: true as const, // Allow all hosts inside the development container proxy
     },
     define: {
       __RESUME_DATA__: JSON.stringify(resumeData),
