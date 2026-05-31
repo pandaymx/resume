@@ -18,7 +18,17 @@ export default defineConfig(({ mode }: { mode: string }) => {
   }
 
   const resumeData = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, resumePath), "utf-8")
+    fs.readFileSync(path.resolve(__dirname, resumePath), "utf-8"),
+  );
+
+  // Load custom local AI memory if exists, otherwise load default template
+  let aiMemoryPath = "./resume.local.md";
+  if (!fs.existsSync(path.resolve(__dirname, aiMemoryPath))) {
+    aiMemoryPath = "./src/data/ai-memory.md";
+  }
+  const aiMemoryData = fs.readFileSync(
+    path.resolve(__dirname, aiMemoryPath),
+    "utf-8",
   );
 
   return {
@@ -29,6 +39,7 @@ export default defineConfig(({ mode }: { mode: string }) => {
     },
     define: {
       __RESUME_DATA__: JSON.stringify(resumeData),
+      __AI_MEMORY__: JSON.stringify(aiMemoryData),
     },
   };
 });
