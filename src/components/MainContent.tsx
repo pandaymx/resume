@@ -31,7 +31,7 @@ const MainContent: React.FC<MainContentProps> = ({ experience, projects }) => {
         <SectionTitle icon={Briefcase} title="工作经历" />
         
         {experience.map((job, index) => (
-          <div key={index} className={`mb-8 relative pl-4 border-l-2 ${job.color === 'blue' ? 'border-blue-200' : 'border-gray-200'}`}>
+          <div key={index} className={`mb-8 relative pl-4 border-l-2 ${job.color === 'blue' ? 'border-blue-200' : 'border-gray-200'} print:break-inside-avoid`}>
             {/* 时间轴圆点 */}
             <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-white ${job.color === 'blue' ? 'bg-blue-500' : 'bg-gray-400'}`}></div>
             

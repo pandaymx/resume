@@ -19,13 +19,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ profile }) => (
-  <header className="bg-slate-800 text-white p-8 print:bg-slate-800 print:text-white md:flex md:justify-between md:items-center">
+  <header className="bg-slate-800 text-white p-8 print:bg-slate-800 print:text-white flex flex-col md:flex-row md:justify-between md:items-center print:flex-row print:justify-between print:items-center">
     <div>
       <h1 className="text-4xl font-bold mb-2 tracking-wide">{profile.name}</h1>
       <h2 className="text-xl text-blue-300 font-medium mb-4">{profile.title}</h2>
       <p className="text-slate-300 max-w-lg text-sm leading-relaxed">{profile.summary}</p>
     </div>
-    <div className="mt-6 md:mt-0 flex flex-col gap-2 text-sm text-slate-300 print:flex-row print:flex-wrap print:gap-x-6 print:gap-y-2 print:mt-4 print:w-full">
+    <div className="mt-6 md:mt-0 flex flex-col gap-2 text-sm text-slate-300 print:flex-col print:gap-2 print:mt-0">
       {profile.contact.map((item, index) => {
         const Icon = item.icon;
         return (

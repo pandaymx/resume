@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages, evaluat
     <aside className="bg-slate-50 w-full md:w-1/3 p-6 border-r border-slate-200 print:w-1/3 print:bg-slate-50">
       
       {/* 技能模块 */}
-      <section className="mb-8">
+      <section className="mb-8 print:break-inside-avoid">
         <SectionTitle icon={Code} title="技术栈" />
         <div className="space-y-4">
           {skills.map((skillGroup, index) => (
@@ -50,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages, evaluat
       </section>
 
       {/* 教育模块 */}
-      <section className="mb-8">
+      <section className="mb-8 print:break-inside-avoid">
         <SectionTitle icon={GraduationCap} title="教育背景" />
         <div className="mb-3">
           <div className="font-bold text-slate-700">{education.school}</div>
@@ -83,7 +83,7 @@ const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages, evaluat
 
       {/* 个人评价 */}
       {evaluation && (
-        <section className="mt-8">
+        <section className="mt-8 print:break-inside-avoid">
           <SectionTitle icon={UserCheck} title="个人评价" />
           <p className="text-sm text-slate-700 leading-relaxed">
             {evaluation}
