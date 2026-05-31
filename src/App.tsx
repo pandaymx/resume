@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Brain, X } from 'lucide-react';
+import { Download, Brain, X, Printer } from 'lucide-react';
 
 // Import data
 import * as data from './data/resume';
@@ -12,6 +12,18 @@ import Header from './components/Header';
 const App: React.FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
+
+  // Print only the AI Memory contents by hiding everything else temporarily
+  const handlePrintMemory = () => {
+    document.body.classList.add('print-memory-only');
+    window.print();
+    const cleanup = () => {
+      document.body.classList.remove('print-memory-only');
+      window.removeEventListener('afterprint', cleanup);
+    };
+    window.addEventListener('afterprint', cleanup);
+    setTimeout(cleanup, 1000); // absolute safety fallback
+  };
 
   // Custom high-performance markdown parser for rendering raw md strings with rich styling
   const renderMarkdown = (text: any) => {
@@ -134,7 +146,7 @@ const App: React.FC = () => {
       </div>
 
       {/* 简历容器 */}
-      <div className="max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none">
+      <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none">
         <Header profile={data.profile} />
 
         <div className="flex flex-col md:flex-row print:flex-row">
@@ -154,10 +166,10 @@ const App: React.FC = () => {
 
       {/* AI 记忆库弹窗 (Modal) */}
       {isMemoryOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in print:hidden">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden border border-slate-100 animate-scale-up">
+        <div className="memory-modal-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+          <div className="memory-modal bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden border border-slate-100 animate-scale-up">
             {/* 弹窗头部 */}
-            <div className="bg-slate-800 text-white p-5 flex justify-between items-center">
+            <div className="memory-modal-header bg-slate-800 text-white p-5 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <Brain className="text-blue-400" size={24} />
                 <div>
@@ -181,7 +193,16 @@ const App: React.FC = () => {
             </div>
 
             {/* 弹窗底部 */}
-            <div className="bg-slate-100 p-4 border-t border-slate-200/50 flex justify-end">
+            <div className="memory-modal-footer bg-slate-100 p-4 border-t border-slate-200/50 flex justify-between items-center gap-4">
+              {/* 打印按钮 */}
+              <button 
+                onClick={handlePrintMemory}
+                className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors cursor-pointer text-sm flex items-center gap-2"
+              >
+                <Printer size={16} className="text-blue-400" />
+                打印此内容
+              </button>
+
               <button 
                 onClick={() => setIsMemoryOpen(false)}
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors cursor-pointer text-sm"

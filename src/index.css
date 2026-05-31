@@ -6,5 +6,40 @@
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    
+    /* Hide the modal during print unless we are specifically printing the memory */
+    body:not(.print-memory-only) .memory-modal-backdrop {
+      display: none !important;
+    }
+    
+    /* When printing the AI Memory only, hide the main resume and optimize modal */
+    body.print-memory-only .resume-container {
+      display: none !important;
+    }
+    body.print-memory-only .memory-modal-backdrop {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      background: white !important;
+      backdrop-filter: none !important;
+      padding: 0 !important;
+      z-index: 9999 !important;
+    }
+    body.print-memory-only .memory-modal {
+      max-width: 100% !important;
+      width: 100% !important;
+      max-height: none !important;
+      height: auto !important;
+      box-shadow: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      background: white !important;
+    }
+    body.print-memory-only .memory-modal-header,
+    body.print-memory-only .memory-modal-footer {
+      display: none !important;
+    }
   }
 }
