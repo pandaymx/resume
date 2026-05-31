@@ -15,6 +15,7 @@ interface Project {
   tech: string;
   desc: string;
   achievements: string[];
+  link?: string;
 }
 
 interface MainContentProps {
@@ -58,9 +59,16 @@ const MainContent: React.FC<MainContentProps> = ({ experience, projects }) => {
             <div key={index} className="bg-slate-50 p-4 rounded border border-slate-100 print:bg-white print:border print:border-slate-300 print:break-inside-avoid">
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-bold text-slate-800">{project.name}</h4>
-                <div className="text-blue-500 text-xs flex items-center gap-1 cursor-pointer print:hidden">
-                  查看代码 <ExternalLink size={12}/>
-                </div>
+                {project.link && (
+                  <a 
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 text-xs flex items-center gap-1 cursor-pointer print:hidden no-underline"
+                  >
+                    查看代码 <ExternalLink size={12}/>
+                  </a>
+                )}
               </div>
               <p className="text-xs text-slate-500 mb-3">技术栈: {project.tech}</p>
               <div className="text-sm text-slate-600 space-y-1">
