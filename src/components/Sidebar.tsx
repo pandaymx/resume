@@ -67,17 +67,19 @@ const Sidebar: React.FC<SidebarProps> = ({ skills, education, languages, evaluat
       </section>
 
       {/* 语言模块 */}
-      <section>
-        <SectionTitle icon={Globe} title="语言" />
-        <ul className="text-sm text-slate-700 space-y-2">
-          {languages.map((lang, idx) => (
-            <li key={idx} className="flex justify-between">
-              <span>{lang.name}</span>
-              <span className="font-semibold">{lang.level}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {languages && languages.length > 0 && (
+        <section className="mb-8">
+          <SectionTitle icon={Globe} title="语言" />
+          <ul className="text-sm text-slate-700 space-y-2">
+            {languages.map((lang, idx) => (
+              <li key={idx} className="flex justify-between">
+                <span>{lang.name}</span>
+                <span className="font-semibold">{lang.level}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* 个人评价 */}
       {evaluation && (

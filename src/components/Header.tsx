@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ profile }) => (
       <h2 className="text-xl text-blue-300 font-medium mb-4">{profile.title}</h2>
       <p className="text-slate-300 max-w-lg text-sm leading-relaxed">{profile.summary}</p>
     </div>
-    <div className="mt-6 md:mt-0 flex flex-col gap-2 text-sm text-slate-300">
+    <div className="mt-6 md:mt-0 flex flex-col gap-2 text-sm text-slate-300 print:flex-row print:flex-wrap print:gap-x-6 print:gap-y-2 print:mt-4 print:w-full">
       {profile.contact.map((item, index) => {
         const Icon = item.icon;
         return (

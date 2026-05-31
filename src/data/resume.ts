@@ -27,7 +27,7 @@ export const profile = {
 
 export const skills = resumeData.skills;
 export const education = resumeData.education;
-export const languages = resumeData.languages;
+export const languages = resumeData.languages || [];
 export const experience = resumeData.experience;
 export const evaluation = resumeData.evaluation;
 export const projects = resumeData.projects;
