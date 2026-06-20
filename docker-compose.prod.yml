@@ -1,0 +1,16 @@
+services:
+  resume-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: resume-prod
+    restart: unless-stopped
+    ports:
+      - "8777:80"
+    networks:
+      - resume-network
+
+networks:
+  resume-network:
+    name: resume-network
+    driver: bridge
