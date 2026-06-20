@@ -5,9 +5,11 @@ import { Download, Brain, X, Printer } from 'lucide-react';
 import * as data from './data/resume';
 
 // Import split components
-import Sidebar from './components/Sidebar';
-import MainContent from './components/MainContent';
 import Header from './components/Header';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Education from './components/Education';
 
 const App: React.FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
@@ -140,21 +142,14 @@ const App: React.FC = () => {
       </div>
 
       {/* 简历容器 */}
-      <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none">
+      <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none px-8 py-6 md:px-12 md:py-10 print:px-10 print:py-8">
         <Header profile={data.profile} />
 
-        <div className="flex flex-col md:flex-row print:flex-row">
-          <Sidebar 
-            skills={data.skills} 
-            education={data.education} 
-            languages={data.languages}
-            evaluation={data.evaluation}
-          />
-          
-          <MainContent 
-            experience={data.experience} 
-            projects={data.projects} 
-          />
+        <div className="mt-5 space-y-6">
+          <Experience experience={data.experience} />
+          <Projects projects={data.projects} />
+          <Skills skills={data.skills} />
+          <Education education={data.education} />
         </div>
       </div>
 

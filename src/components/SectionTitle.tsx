@@ -9,8 +9,8 @@ interface SectionTitleProps {
 
 const SectionTitle: React.FC<SectionTitleProps> = ({ icon: Icon, title, className = "" }) => {
   return (
-    <h3 className={`text-lg font-bold text-slate-800 border-b-2 border-blue-500 pb-2 mb-4 flex items-center gap-2 ${className}`}>
-      {Icon && <Icon size={20} className="text-blue-600" />} 
+    <h3 className={`text-base font-bold text-slate-800 border-b border-slate-200 pb-1.5 mb-4 flex items-center gap-2 ${className}`}>
+      {Icon && <Icon size={18} className="text-slate-500" />} 
       {title}
     </h3>
   );
