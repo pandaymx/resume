@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -40,6 +41,11 @@ export default defineConfig(({ mode }: { mode: string }) => {
     define: {
       __RESUME_DATA__: JSON.stringify(resumeData),
       __AI_MEMORY__: JSON.stringify(aiMemoryData),
+    },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts'],
     },
   };
 });
