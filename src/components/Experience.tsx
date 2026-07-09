@@ -2,14 +2,14 @@ import React from 'react';
 import { Briefcase } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
-interface ExperienceItem {
+export interface ExperienceItem {
   role: string;
   company: string;
   time: string;
   details: string[];
 }
 
-interface ExperienceProps {
+export interface ExperienceProps {
   experience: ExperienceItem[];
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Server, ExternalLink } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
-interface ProjectItem {
+export interface ProjectItem {
   name: string;
   tech: string;
   desc: string;
@@ -10,7 +10,7 @@ interface ProjectItem {
   link?: string;
 }
 
-interface ProjectsProps {
+export interface ProjectsProps {
   projects: ProjectItem[];
 }
 

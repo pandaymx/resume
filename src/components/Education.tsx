@@ -2,14 +2,14 @@ import React from 'react';
 import { GraduationCap } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
-interface EducationData {
+export interface EducationData {
   school: string;
   degree: string;
   time: string;
   details: string[];
 }
 
-interface EducationProps {
+export interface EducationProps {
   education: EducationData;
 }
 
