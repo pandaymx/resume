@@ -28,6 +28,7 @@ const App: React.FC = () => {
   };
 
   // Custom high-performance markdown parser for rendering raw md strings with rich styling
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderMarkdown = (text: any) => {
     const markdownString = typeof text === 'string' 
       ? text 
