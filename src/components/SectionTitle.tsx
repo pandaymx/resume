@@ -1,7 +1,7 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
 
-interface SectionTitleProps {
+export interface SectionTitleProps {
   icon?: LucideIcon;
   title: string;
   className?: string;

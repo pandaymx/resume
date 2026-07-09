@@ -2,12 +2,12 @@ import React from 'react';
 import { Code } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
-interface SkillGroup {
+export interface SkillGroup {
   category: string;
   items: string[];
 }
 
-interface SkillsProps {
+export interface SkillsProps {
   skills: SkillGroup[];
 }
 
