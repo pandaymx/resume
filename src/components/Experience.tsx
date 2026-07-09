@@ -6,7 +6,6 @@ interface ExperienceItem {
   role: string;
   company: string;
   time: string;
-  color: string;
   details: string[];
 }
 
