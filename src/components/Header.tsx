@@ -1,20 +1,20 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
 
-interface ContactItem {
+export interface ContactItem {
   icon: LucideIcon;
   value: string;
   link?: string;
 }
 
-interface Profile {
+export interface Profile {
   name: string;
   title: string;
   summary: string;
   contact: ContactItem[];
 }
 
-interface HeaderProps {
+export interface HeaderProps {
   profile: Profile;
 }
 

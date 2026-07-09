@@ -11,6 +11,13 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Education from './components/Education';
 
+// Import types for proper typing
+import type { Profile } from './components/Header';
+import type { ExperienceItem } from './components/Experience';
+import type { ProjectItem } from './components/Projects';
+import type { SkillGroup } from './components/Skills';
+import type { EducationData } from './components/Education';
+
 // Hoist regular expressions to module level for better performance
 // This avoids repeatedly compiling regexes during every render and every parsed line
 const inlineRegex = /(\*\*.*?\*\*|`.*?`)/g;
@@ -28,8 +35,7 @@ const App: React.FC = () => {
   };
 
   // Custom high-performance markdown parser for rendering raw md strings with rich styling
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderMarkdown = (text: any) => {
+  const renderMarkdown = (text: string | { default: string } | undefined | null) => {
     const markdownString = typeof text === 'string' 
       ? text 
       : (text && typeof text === 'object' && 'default' in text ? text.default : '');
@@ -150,13 +156,13 @@ const App: React.FC = () => {
 
       {/* 简历容器 */}
       <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none px-8 py-6 md:px-12 md:py-10 print:px-10 print:py-8">
-        <Header profile={data.profile} />
+        <Header profile={data.profile as unknown as Profile} />
 
         <div className="mt-5 space-y-6">
-          <Experience experience={data.experience} />
-          <Projects projects={data.projects} />
-          <Skills skills={data.skills} />
-          <Education education={data.education} />
+          <Experience experience={data.experience as unknown as ExperienceItem[]} />
+          <Projects projects={data.projects as unknown as ProjectItem[]} />
+          <Skills skills={data.skills as unknown as SkillGroup[]} />
+          <Education education={data.education as unknown as EducationData} />
         </div>
       </div>
 

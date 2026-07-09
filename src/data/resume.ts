@@ -1,14 +1,27 @@
 import { MapPin, Phone, Mail, GithubIcon, Globe } from "lucide-react";
 
+import React from "react";
+
+interface ResumeData {
+  profile: {
+    contact: Array<Record<string, unknown>>;
+    [key: string]: unknown;
+  };
+  skills: unknown;
+  education: unknown;
+  languages?: unknown;
+  experience: unknown;
+  evaluation: unknown;
+  projects: unknown;
+}
+
 // Declare the compile-time injected global variable from Vite config
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const __RESUME_DATA__: any;
+declare const __RESUME_DATA__: ResumeData;
 
 const resumeData = __RESUME_DATA__;
 
 // Dynamic icon mapper to resolve JSON string descriptors to React components
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
   Phone,
   Mail,
   MapPin,
@@ -19,10 +32,9 @@ const iconMap: Record<string, any> = {
 // Map contact icon strings to actual React components
 export const profile = {
   ...resumeData.profile,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  contact: resumeData.profile.contact.map((item: any) => ({
+  contact: resumeData.profile.contact.map((item: Record<string, unknown>) => ({
     ...item,
-    icon: iconMap[item.icon] || Globe,
+    icon: iconMap[item.icon as string] || Globe,
   })),
 };
 
