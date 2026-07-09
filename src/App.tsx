@@ -11,6 +11,13 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Education from './components/Education';
 
+// Hoist regular expressions to module level for better performance
+// This avoids repeatedly compiling regexes during every render and every parsed line
+const inlineRegex = /(\*\*.*?\*\*|`.*?`)/g;
+const nonWhitespaceRegex = /\S/;
+const unorderedListRegex = /^[-*]\s+(.*)$/;
+const orderedListRegex = /^(\d+)\.\s+(.*)$/;
+
 const App: React.FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
@@ -32,8 +39,7 @@ const App: React.FC = () => {
 
     // Recursively parse inline bold (**text**) and code blocks (`text`)
     const parseInline = (inlineText: string): React.ReactNode[] => {
-      const regex = /(\*\*.*?\*\*|`.*?`)/g;
-      const parts = inlineText.split(regex);
+      const parts = inlineText.split(inlineRegex);
       return parts.map((part, index) => {
         if (part.startsWith('**') && part.endsWith('**')) {
           return <strong key={index} className="font-bold text-slate-800">{part.slice(2, -2)}</strong>;
@@ -50,7 +56,7 @@ const App: React.FC = () => {
     };
 
     return markdownString.split('\n').map((line, i) => {
-      const leadingSpaces = line.search(/\S/);
+      const leadingSpaces = line.search(nonWhitespaceRegex);
       const trimmed = line.trim();
 
       if (trimmed === '') {
@@ -87,7 +93,7 @@ const App: React.FC = () => {
       }
 
       // 3. Unordered Lists (bullet points, supporting leading spaces indentation)
-      const ulMatch = trimmed.match(/^[-*]\s+(.*)$/);
+      const ulMatch = trimmed.match(unorderedListRegex);
       if (ulMatch) {
         const indentStyle = leadingSpaces > 0 ? { marginLeft: `${leadingSpaces * 6}px` } : { marginLeft: '16px' };
         return (
@@ -98,7 +104,7 @@ const App: React.FC = () => {
       }
 
       // 4. Numbered Lists
-      const olMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+      const olMatch = trimmed.match(orderedListRegex);
       if (olMatch) {
         const num = parseInt(olMatch[1], 10);
         const indentStyle = leadingSpaces > 0 ? { marginLeft: `${leadingSpaces * 6}px` } : { marginLeft: '16px' };
