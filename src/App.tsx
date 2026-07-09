@@ -18,6 +18,13 @@ import type { ProjectItem } from './components/Projects';
 import type { SkillGroup } from './components/Skills';
 import type { EducationData } from './components/Education';
 
+// Hoist regular expressions to module level for better performance
+// This avoids repeatedly compiling regexes during every render and every parsed line
+const inlineRegex = /(\*\*.*?\*\*|`.*?`)/g;
+const nonWhitespaceRegex = /\S/;
+const unorderedListRegex = /^[-*]\s+(.*)$/;
+const orderedListRegex = /^(\d+)\.\s+(.*)$/;
+
 const App: React.FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
