@@ -9,7 +9,7 @@ interface ResumeData {
   };
   skills: unknown;
   education: unknown;
-  languages?: unknown;
+  languages?: Array<{ name: string; level: string }>;
   experience: unknown;
   evaluation: unknown;
   projects: unknown;
