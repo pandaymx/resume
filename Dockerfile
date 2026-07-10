@@ -1,15 +1,21 @@
 FROM oven/bun:latest
 
+# Create and chown the directory as root before switching users
+RUN mkdir -p /app && chown bun:bun /app
+
 WORKDIR /app
 
+# Run as non-root user
+USER bun
+
 # Copy package files and lockfile
-COPY package.json bun.lock ./
+COPY --chown=bun:bun package.json bun.lock ./
 
 # Install dependencies using Bun
 RUN bun install
 
 # Copy project files
-COPY . .
+COPY --chown=bun:bun . .
 
 # Expose Vite dev port
 EXPOSE 5173

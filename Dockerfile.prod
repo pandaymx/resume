@@ -1,13 +1,15 @@
 # Stage 1: Build static site using Bun
 FROM oven/bun:latest AS builder
+RUN mkdir -p /app && chown bun:bun /app
 WORKDIR /app
-COPY package.json bun.lock ./
+USER bun
+COPY --chown=bun:bun package.json bun.lock ./
 RUN bun install
-COPY . .
+COPY --chown=bun:bun . .
 RUN bun run build
 
 # Stage 2: Serve using Nginx
 FROM nginxinc/nginx-unprivileged:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
