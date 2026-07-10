@@ -51,6 +51,29 @@ describe('Header Component', () => {
     expect(phoneText.tagName).not.toBe('A');
   });
 
+  it('renders unsafe links as plain text to prevent XSS', () => {
+    const profileWithUnsafeLink = {
+      ...mockProfile,
+      contact: [
+        {
+          icon: Mail,
+          value: 'Click Here',
+          link: 'javascript:alert(1)'
+        }
+      ]
+    };
+    render(<Header profile={profileWithUnsafeLink} />);
+
+    // The text should render, but not as a link
+    const textNode = screen.getByText('Click Here');
+    expect(textNode).toBeInTheDocument();
+    expect(textNode.tagName).toBe('SPAN'); // as per the fallback in the component
+
+    // Ensure no link has the javascript href
+    const link = screen.queryByRole('link', { name: 'Click Here' });
+    expect(link).not.toBeInTheDocument();
+  });
+
   it('renders correctly with empty contact list', () => {
     const profileWithoutContact = { ...mockProfile, contact: [] };
     render(<Header profile={profileWithoutContact} />);

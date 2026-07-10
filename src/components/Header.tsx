@@ -1,5 +1,6 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
+import { isSafeUrl } from '../utils/sanitizeUrl';
 
 export interface ContactItem {
   icon: LucideIcon;
@@ -33,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ profile }) => (
             <React.Fragment key={index}>
               <div className="flex items-center gap-1">
                 <Icon size={13} className="text-slate-400" />
-                {item.link ? (
+                {item.link && isSafeUrl(item.link) ? (
                   <a 
                     href={item.link} 
                     target="_blank" 
