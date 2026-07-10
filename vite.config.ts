@@ -32,11 +32,17 @@ export default defineConfig(({ mode }: { mode: string }) => {
     "utf-8",
   );
 
+  // Configure allowed hosts for development server from environment variable
+  // or fall back to secure defaults
+  const allowedHosts = env.VITE_ALLOWED_HOSTS
+    ? env.VITE_ALLOWED_HOSTS.split(',').map((h: string) => h.trim())
+    : ['localhost', '127.0.0.1'];
+
   return {
     plugins: [react(), tailwindcss()],
     base: "./", // Use relative paths for GitHub Pages
     server: {
-      allowedHosts: true as const, // Allow all hosts inside the development container proxy
+      allowedHosts,
     },
     define: {
       __RESUME_DATA__: JSON.stringify(resumeData),
