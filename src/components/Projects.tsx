@@ -1,6 +1,7 @@
 import React from 'react';
 import { Server, ExternalLink } from 'lucide-react';
 import SectionTitle from './SectionTitle';
+import { isSafeUrl } from '../utils/sanitizeUrl';
 
 export interface ProjectItem {
   name: string;
@@ -29,7 +30,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 <h4 className="font-bold text-slate-800 text-sm">{project.name}</h4>
                 <span className="text-xs text-slate-500 font-medium">（技术栈: {project.tech}）</span>
               </div>
-              {project.link && (
+              {project.link && isSafeUrl(project.link) ? (
                 <a 
                   href={project.link}
                   target="_blank"
@@ -38,7 +39,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 >
                   查看代码 <ExternalLink size={12}/>
                 </a>
-              )}
+              ) : null}
             </div>
             
             <div className="text-xs text-slate-600 space-y-1.5 mt-1.5 leading-relaxed">
