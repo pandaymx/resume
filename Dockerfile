@@ -1,15 +1,16 @@
 FROM oven/bun:latest
 
+USER bun
 WORKDIR /app
 
 # Copy package files and lockfile
-COPY package.json bun.lock ./
+COPY --chown=bun:bun package.json bun.lock ./
 
 # Install dependencies using Bun
 RUN bun install
 
 # Copy project files
-COPY . .
+COPY --chown=bun:bun . .
 
 # Expose Vite dev port
 EXPOSE 5173
