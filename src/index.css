@@ -8,3 +8,57 @@
     }
   }
 }
+
+@media print {
+  body:has(.print-memory-mode) {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+  }
+
+  /* Hide resume and controls */
+  .print-memory-mode .resume-container,
+  .print-memory-mode .fixed.bottom-8,
+  .print-memory-mode .print\:hidden,
+  .print-memory-mode button,
+  .print-memory-mode .memory-modal-header,
+  .print-memory-mode .memory-modal-footer {
+    display: none !important;
+  }
+
+  /* Reset backdrop/modal wrapper to be a clean printable document flow */
+  .print-memory-mode .memory-modal-backdrop {
+    position: static !important;
+    display: block !important;
+    background: white !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    z-index: auto !important;
+    animation: none !important;
+  }
+
+  .print-memory-mode .memory-modal {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+    animation: none !important;
+  }
+
+  .print-memory-mode .memory-modal-body {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+}

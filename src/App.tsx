@@ -132,7 +132,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans print:p-0 print:bg-white relative">
+    <div className={`min-h-screen bg-gray-100 p-4 md:p-8 font-sans print:p-0 print:bg-white relative ${isMemoryOpen ? 'print-memory-mode' : ''}`}>
       {/* 悬浮按钮组 */}
       <div className="fixed bottom-8 right-8 flex gap-4 print:hidden z-40">
         {/* AI 记忆按钮 */}
@@ -169,60 +169,6 @@ const App: React.FC = () => {
       {/* AI 记忆库弹窗 (Modal) */}
       {isMemoryOpen && (
         <>
-          <style dangerouslySetInnerHTML={{ __html: `
-            @media print {
-              body {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                background: white !important;
-              }
-              /* Hide resume and controls */
-              .resume-container,
-              .fixed.bottom-8,
-              .print\\:hidden,
-              button,
-              .memory-modal-header,
-              .memory-modal-footer {
-                display: none !important;
-              }
-              
-              /* Reset backdrop/modal wrapper to be a clean printable document flow */
-              .memory-modal-backdrop {
-                position: static !important;
-                display: block !important;
-                background: white !important;
-                backdrop-filter: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                height: auto !important;
-                overflow: visible !important;
-                z-index: auto !important;
-                animation: none !important;
-              }
-              
-              .memory-modal {
-                max-width: 100% !important;
-                width: 100% !important;
-                max-height: none !important;
-                height: auto !important;
-                box-shadow: none !important;
-                border: none !important;
-                border-radius: 0 !important;
-                background: white !important;
-                overflow: visible !important;
-                animation: none !important;
-              }
-              
-              .memory-modal-body {
-                overflow: visible !important;
-                max-height: none !important;
-                height: auto !important;
-                padding: 0 !important;
-                background: white !important;
-              }
-            }
-          `}} />
           <div className="memory-modal-backdrop fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
             <div className="memory-modal bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden border border-slate-100 animate-scale-up">
               {/* 弹窗头部 */}
