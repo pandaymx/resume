@@ -10,6 +10,7 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import Languages from './components/Languages';
 
 // Import types for proper typing
 import type { Profile } from './components/Header';
@@ -17,6 +18,7 @@ import type { ExperienceItem } from './components/Experience';
 import type { ProjectItem } from './components/Projects';
 import type { SkillGroup } from './components/Skills';
 import type { EducationData } from './components/Education';
+import type { LanguageItem } from './components/Languages';
 
 // Hoist regular expressions to module level for better performance
 // This avoids repeatedly compiling regexes during every render and every parsed line
@@ -163,6 +165,7 @@ const App: React.FC = () => {
           <Projects projects={data.projects as unknown as ProjectItem[]} />
           <Skills skills={data.skills as unknown as SkillGroup[]} />
           <Education education={data.education as unknown as EducationData} />
+          <Languages languages={data.languages as unknown as LanguageItem[]} />
         </div>
       </div>
 

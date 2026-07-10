@@ -41,7 +41,8 @@
   },
   "languages": [
     { "name": "中文", "level": "母语" },
-    { "name": "英语", "level": "CET-6 (读写流利)" }
+    { "name": "英语", "level": "CET-6 (读写流利)" },
+    { "name": "英语", "level": "CET-4" }
   ],
   "experience": [
     {
