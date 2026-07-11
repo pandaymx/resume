@@ -13,13 +13,21 @@ export default defineConfig(({ mode }: { mode: string }) => {
   // 1. Resolve custom resume path from .env (VITE_RESUME_JSON_PATH)
   // 2. Fall back to resume.local.json (ignored by Git *.local)
   // 3. Fall back to standard template resume.json
-  let resumePath = env.VITE_RESUME_JSON_PATH || "./resume.local.json";
-  if (!fs.existsSync(path.resolve(__dirname, resumePath))) {
-    resumePath = "./resume.json";
+  const resumePath = env.VITE_RESUME_JSON_PATH || "./resume.local.json";
+  const rootDir = path.resolve(__dirname);
+  let resolvedResumePath = path.resolve(rootDir, resumePath);
+
+  // Security check to prevent path traversal
+  if (resolvedResumePath !== rootDir && !resolvedResumePath.startsWith(rootDir + path.sep)) {
+    throw new Error("VITE_RESUME_JSON_PATH must resolve within the project directory");
+  }
+
+  if (!fs.existsSync(resolvedResumePath)) {
+    resolvedResumePath = path.resolve(rootDir, "./resume.json");
   }
 
   const resumeData = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, resumePath), "utf-8"),
+    fs.readFileSync(resolvedResumePath, "utf-8"),
   );
 
   // Load custom local AI memory if exists, otherwise load default template
