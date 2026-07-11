@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Server, ExternalLink } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 import { isSafeUrl } from '../utils/sanitizeUrl';
@@ -16,11 +16,18 @@ export interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+  const memoizedProjects = useMemo(() => {
+    return projects.map(project => ({
+      ...project,
+      isLinkSafe: project.link ? isSafeUrl(project.link) : false
+    }));
+  }, [projects]);
+
   return (
     <section className="mb-6">
       <SectionTitle icon={Server} title="重点项目" />
       <div className="space-y-4">
-        {projects.map((project, index) => (
+        {memoizedProjects.map((project, index) => (
           <div 
             key={index} 
             className="pb-4 border-b border-slate-100 last:border-0 last:pb-0 print:break-inside-avoid"
@@ -30,7 +37,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                 <h4 className="font-bold text-slate-800 text-sm">{project.name}</h4>
                 <span className="text-xs text-slate-500 font-medium">（技术栈: {project.tech}）</span>
               </div>
-              {project.link && isSafeUrl(project.link) ? (
+              {project.link && project.isLinkSafe ? (
                 <a 
                   href={project.link}
                   target="_blank"
