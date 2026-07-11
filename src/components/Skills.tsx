@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Code } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
@@ -11,7 +11,7 @@ export interface SkillsProps {
   skills: SkillGroup[];
 }
 
-const Skills: React.FC<SkillsProps> = ({ skills }) => {
+const Skills: FC<SkillsProps> = ({ skills }) => {
   return (
     <section className="mb-6 print:break-inside-avoid">
       <SectionTitle icon={Code} title="专业技能" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Languages as LanguagesIcon } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
@@ -11,7 +11,7 @@ export interface LanguagesProps {
   languages: LanguageItem[];
 }
 
-const Languages: React.FC<LanguagesProps> = ({ languages }) => {
+const Languages: FC<LanguagesProps> = ({ languages }) => {
   if (!languages || languages.length === 0) return null;
 
   return (

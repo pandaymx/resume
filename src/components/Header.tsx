@@ -1,4 +1,5 @@
-import React from 'react';
+import type { FC } from 'react';
+import { Fragment } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { isSafeUrl } from '../utils/sanitizeUrl';
 
@@ -19,7 +20,7 @@ export interface HeaderProps {
   profile: Profile;
 }
 
-const Header: React.FC<HeaderProps> = ({ profile }) => (
+const Header: FC<HeaderProps> = ({ profile }) => (
   <header className="bg-white pt-6 pb-4 border-b border-slate-200 flex flex-col gap-3">
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 flex-wrap">
       <div className="flex items-baseline gap-3 flex-wrap">
@@ -31,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ profile }) => (
         {profile.contact.map((item, index) => {
           const Icon = item.icon;
           return (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <div className="flex items-center gap-1">
                 <Icon size={13} className="text-slate-400" />
                 {item.link && isSafeUrl(item.link) ? (
@@ -50,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ profile }) => (
               {index < profile.contact.length - 1 && (
                 <span className="text-slate-300 select-none">|</span>
               )}
-            </React.Fragment>
+            </Fragment>
           );
         })}
       </div>

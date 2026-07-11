@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 import { Download, Brain, X, Printer } from 'lucide-react';
 
 // Import data
@@ -22,7 +23,7 @@ import type { LanguageItem } from './components/Languages';
 
 import { renderMarkdown } from './utils/markdown';
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
 

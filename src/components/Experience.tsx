@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Briefcase } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
@@ -13,7 +13,7 @@ export interface ExperienceProps {
   experience: ExperienceItem[];
 }
 
-const Experience: React.FC<ExperienceProps> = ({ experience }) => {
+const Experience: FC<ExperienceProps> = ({ experience }) => {
   return (
     <section className="mb-6">
       <SectionTitle icon={Briefcase} title="工作经历" />

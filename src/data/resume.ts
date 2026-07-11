@@ -1,6 +1,6 @@
 import { MapPin, Phone, Mail, GithubIcon, Globe } from "lucide-react";
 
-import React from "react";
+import type { ElementType } from 'react';
 
 interface ResumeData {
   profile: {
@@ -21,7 +21,7 @@ declare const __RESUME_DATA__: ResumeData;
 const resumeData = __RESUME_DATA__;
 
 // Dynamic icon mapper to resolve JSON string descriptors to React components
-const iconMap: Record<string, React.ElementType> = {
+const iconMap: Record<string, ElementType> = {
   Phone,
   Mail,
   MapPin,
