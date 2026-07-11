@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { GraduationCap } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 
@@ -13,7 +13,7 @@ export interface EducationProps {
   education: EducationData;
 }
 
-const Education: React.FC<EducationProps> = ({ education }) => {
+const Education: FC<EducationProps> = ({ education }) => {
   return (
     <section className="mb-4 print:break-inside-avoid">
       <SectionTitle icon={GraduationCap} title="教育背景" />

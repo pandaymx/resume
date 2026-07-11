@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type { FC, ReactNode } from 'react';
+import { useState } from 'react';
 import { Download, Brain, X, Printer } from 'lucide-react';
 
 // Import data
@@ -27,7 +28,7 @@ const nonWhitespaceRegex = /\S/;
 const unorderedListRegex = /^[-*]\s+(.*)$/;
 const orderedListRegex = /^(\d+)\.\s+(.*)$/;
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
 
@@ -47,7 +48,7 @@ const App: React.FC = () => {
     }
 
     // Recursively parse inline bold (**text**) and code blocks (`text`)
-    const parseInline = (inlineText: string): React.ReactNode[] => {
+    const parseInline = (inlineText: string): ReactNode[] => {
       const parts = inlineText.split(inlineRegex);
       return parts.map((part, index) => {
         if (part.startsWith('**') && part.endsWith('**')) {

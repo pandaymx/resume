@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Server, ExternalLink } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 import { isSafeUrl } from '../utils/sanitizeUrl';
@@ -15,7 +15,7 @@ export interface ProjectsProps {
   projects: ProjectItem[];
 }
 
-const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+const Projects: FC<ProjectsProps> = ({ projects }) => {
   return (
     <section className="mb-6">
       <SectionTitle icon={Server} title="重点项目" />
