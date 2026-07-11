@@ -6,7 +6,7 @@ services:
     container_name: resume-prod
     restart: unless-stopped
     ports:
-      - "8777:80"
+      - "8777:8080"
     networks:
       - resume-network
 
