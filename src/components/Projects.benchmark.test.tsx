@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import Projects, { type ProjectItem } from './Projects';
 
 describe('Projects Component Performance', () => {
@@ -24,6 +24,6 @@ describe('Projects Component Performance', () => {
     }
     const end = performance.now();
 
-    console.log(`\n\n📊 Re-render Benchmark Results: ${end - start} ms\n\n`);
+    expect(end - start).toBeLessThan(19500);
   }, 20000); // 20s timeout
 });
