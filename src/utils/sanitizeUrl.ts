@@ -2,6 +2,7 @@ export function isSafeUrl(url: string): boolean {
   // Reject URLs containing control characters, unencoded spaces/tabs, or DEL
   // as they can be used to bypass protocol parsing in new URL()
   // e.g. java\nscript:alert(1)
+  // eslint-disable-next-line no-control-regex
   if (/[\x00-\x20\x7F]/.test(url)) {
     return false;
   }
