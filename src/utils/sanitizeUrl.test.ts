@@ -14,8 +14,15 @@ describe('isSafeUrl', () => {
 
   it('should block javascript', () => {
     expect(isSafeUrl('javascript:alert(1)')).toBe(false);
-    expect(isSafeUrl('  javascript:alert(1)')).toBe(false);
     expect(isSafeUrl('javascript:alert("XSS")')).toBe(false);
+  });
+
+  it('should reject URLs with spaces, tabs, or control characters', () => {
+    expect(isSafeUrl('  javascript:alert(1)')).toBe(false);
+    expect(isSafeUrl('\x19javascript:alert(1)')).toBe(false);
+    expect(isSafeUrl('java\nscript:alert(1)')).toBe(false);
+    expect(isSafeUrl('javascript\t:alert(1)')).toBe(false);
+    expect(isSafeUrl('\x00http://safe.com')).toBe(false);
   });
 
   it('should allow relative urls', () => {
