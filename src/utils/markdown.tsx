@@ -8,6 +8,10 @@ const orderedListRegex = /^(\d+)\.\s+(.*)$/;
 
 // Recursively parse inline bold (**text**) and code blocks (`text`)
 export const parseInline = (inlineText: string): React.ReactNode[] => {
+  if (!inlineText.includes('**') && !inlineText.includes('`')) {
+    return [inlineText];
+  }
+
   const parts = inlineText.split(inlineRegex);
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
