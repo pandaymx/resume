@@ -1,20 +1,7 @@
 import { useMemo, type FC } from 'react';
 import { Fragment } from 'react';
-import type { LucideIcon } from 'lucide-react';
 import { isSafeUrl } from '../utils/sanitizeUrl';
-
-export interface ContactItem {
-  icon: LucideIcon;
-  value: string;
-  link?: string;
-}
-
-export interface Profile {
-  name: string;
-  title: string;
-  summary: string;
-  contact: ContactItem[];
-}
+import type { Profile } from '../types/resume';
 
 export interface HeaderProps {
   profile: Profile;

@@ -1,13 +1,7 @@
 import type { FC } from 'react';
 import { Briefcase } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-
-export interface ExperienceItem {
-  role: string;
-  company: string;
-  time: string;
-  details: string[];
-}
+import type { ExperienceItem } from '../types/resume';
 
 export interface ExperienceProps {
   experience: ExperienceItem[];

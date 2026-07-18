@@ -1,11 +1,7 @@
 import type { FC } from 'react';
 import { Languages as LanguagesIcon } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-
-export interface LanguageItem {
-  name: string;
-  level: string;
-}
+import type { LanguageItem } from '../types/resume';
 
 export interface LanguagesProps {
   languages: LanguageItem[];

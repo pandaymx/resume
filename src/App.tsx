@@ -13,14 +13,6 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Languages from './components/Languages';
 
-// Import types for proper typing
-import type { Profile } from './components/Header';
-import type { ExperienceItem } from './components/Experience';
-import type { ProjectItem } from './components/Projects';
-import type { SkillGroup } from './components/Skills';
-import type { EducationData } from './components/Education';
-import type { LanguageItem } from './components/Languages';
-
 import { renderMarkdown } from './utils/markdown';
 
 const App: FC = () => {
@@ -57,14 +49,14 @@ const App: FC = () => {
 
       {/* 简历容器 */}
       <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none px-8 py-6 md:px-12 md:py-10 print:px-10 print:py-8">
-        <Header profile={data.profile as unknown as Profile} />
+        <Header profile={data.profile} />
 
         <div className="mt-5 space-y-6">
-          <Experience experience={data.experience as unknown as ExperienceItem[]} />
-          <Projects projects={data.projects as unknown as ProjectItem[]} />
-          <Skills skills={data.skills as unknown as SkillGroup[]} />
-          <Education education={data.education as unknown as EducationData} />
-          <Languages languages={data.languages as unknown as LanguageItem[]} />
+          <Experience experience={data.experience} />
+          <Projects projects={data.projects} />
+          <Skills skills={data.skills} />
+          <Education education={data.education} />
+          <Languages languages={data.languages} />
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Skills from './Skills';
-import type { SkillGroup } from './Skills';
+import type { SkillGroup } from '../types/resume';
 
 describe('Skills Component', () => {
   const mockSkills: SkillGroup[] = [

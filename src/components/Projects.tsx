@@ -2,14 +2,7 @@ import { useMemo, type FC } from 'react';
 import { Server, ExternalLink } from 'lucide-react';
 import SectionTitle from './SectionTitle';
 import { isSafeUrl } from '../utils/sanitizeUrl';
-
-export interface ProjectItem {
-  name: string;
-  tech: string;
-  desc: string;
-  achievements: string[];
-  link?: string;
-}
+import type { ProjectItem } from '../types/resume';
 
 export interface ProjectsProps {
   projects: ProjectItem[];

@@ -1,11 +1,7 @@
 import type { FC } from 'react';
 import { Code } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-
-export interface SkillGroup {
-  category: string;
-  items: string[];
-}
+import type { SkillGroup } from '../types/resume';
 
 export interface SkillsProps {
   skills: SkillGroup[];

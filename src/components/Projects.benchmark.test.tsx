@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import Projects, { type ProjectItem } from './Projects';
+import Projects from './Projects';
+import type { ProjectItem } from '../types/resume';
 
 describe('Projects Component Performance', () => {
   it('should measure rendering performance', () => {

@@ -1,19 +1,16 @@
 import { MapPin, Phone, Mail, GithubIcon, Globe } from "lucide-react";
 
 import type { ElementType } from 'react';
-
-interface ResumeData {
-  profile: {
-    contact: Array<Record<string, unknown>>;
-    [key: string]: unknown;
-  };
-  skills: unknown;
-  education: unknown;
-  languages?: Array<{ name: string; level: string }>;
-  experience: unknown;
-  evaluation: unknown;
-  projects: unknown;
-}
+import type {
+  ResumeData,
+  Profile,
+  SkillGroup,
+  EducationData,
+  LanguageItem,
+  ExperienceItem,
+  ProjectItem,
+  RawContactItem
+} from "../types/resume";
 
 // Declare the compile-time injected global variable from Vite config
 declare const __RESUME_DATA__: ResumeData;
@@ -30,19 +27,19 @@ const iconMap: Record<string, ElementType> = {
 };
 
 // Map contact icon strings to actual React components
-export const profile = {
+export const profile: Profile = {
   ...resumeData.profile,
-  contact: resumeData.profile.contact.map((item: Record<string, unknown>) => ({
+  contact: resumeData.profile.contact.map((item: RawContactItem) => ({
     ...item,
-    icon: iconMap[item.icon as string] || Globe,
+    icon: (iconMap[item.icon] || Globe) as unknown as import('lucide-react').LucideIcon,
   })),
 };
 
-export const skills = resumeData.skills;
-export const education = resumeData.education;
-export const languages = resumeData.languages || [];
-export const experience = resumeData.experience;
-export const projects = resumeData.projects;
+export const skills: SkillGroup[] = resumeData.skills;
+export const education: EducationData = resumeData.education;
+export const languages: LanguageItem[] = resumeData.languages || [];
+export const experience: ExperienceItem[] = resumeData.experience;
+export const projects: ProjectItem[] = resumeData.projects;
 
 declare const __AI_MEMORY__: string;
 

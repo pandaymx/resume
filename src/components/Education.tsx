@@ -1,13 +1,7 @@
 import type { FC } from 'react';
 import { GraduationCap } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-
-export interface EducationData {
-  school: string;
-  degree: string;
-  time: string;
-  details: string[];
-}
+import type { EducationData } from '../types/resume';
 
 export interface EducationProps {
   education: EducationData;
