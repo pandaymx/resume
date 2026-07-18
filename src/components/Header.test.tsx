@@ -11,11 +11,13 @@ describe('Header Component', () => {
       {
         icon: Mail,
         value: 'jane.doe@example.com',
-        link: 'mailto:jane.doe@example.com'
+        link: 'mailto:jane.doe@example.com',
+        isLinkSafe: true
       },
       {
         icon: Phone,
-        value: '123-456-7890'
+        value: '123-456-7890',
+        isLinkSafe: false
       }
     ]
   };
@@ -58,7 +60,8 @@ describe('Header Component', () => {
         {
           icon: Mail,
           value: 'Click Here',
-          link: 'javascript:alert(1)'
+          link: 'javascript:alert(1)',
+          isLinkSafe: false
         }
       ]
     };

@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, GithubIcon, Globe } from "lucide-react";
-
+import { isSafeUrl } from '../utils/sanitizeUrl';
 import type { ElementType } from 'react';
 
 interface ResumeData {
@@ -35,6 +35,7 @@ export const profile = {
   contact: resumeData.profile.contact.map((item: Record<string, unknown>) => ({
     ...item,
     icon: iconMap[item.icon as string] || Globe,
+    isLinkSafe: item.link ? isSafeUrl(item.link as string) : false,
   })),
 };
 
