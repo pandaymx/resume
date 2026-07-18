@@ -24,14 +24,26 @@ export const parseInline = (inlineText: string): React.ReactNode[] => {
   });
 };
 
+export const getMarkdownString = (text: string | { default: string } | undefined | null): string | null => {
+  if (typeof text === 'string') {
+    return text;
+  }
+  if (text && typeof text === 'object' && 'default' in text) {
+    return text.default;
+  }
+  return null;
+};
+
 // Custom high-performance markdown parser for rendering raw md strings with rich styling
 export const renderMarkdown = (text: string | { default: string } | undefined | null) => {
-  const markdownString = typeof text === 'string'
-    ? text
-    : (text && typeof text === 'object' && 'default' in text ? text.default : '');
+  const markdownString = getMarkdownString(text);
 
-  if (!markdownString || typeof markdownString !== 'string') {
+  if (markdownString === null) {
     return <p className="text-slate-500 text-sm">正在加载数据或数据格式错误...</p>;
+  }
+
+  if (markdownString === '') {
+    return null;
   }
 
   return markdownString.split('\n').map((line, i) => {

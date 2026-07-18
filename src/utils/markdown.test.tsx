@@ -1,9 +1,30 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { parseInline, renderMarkdown } from './markdown';
+import { parseInline, renderMarkdown, getMarkdownString } from './markdown';
 
 describe('markdown utilities', () => {
+  describe('getMarkdownString', () => {
+    it('should return the string if input is a string', () => {
+      expect(getMarkdownString('Hello')).toBe('Hello');
+      expect(getMarkdownString('')).toBe('');
+    });
+
+    it('should return the default property if input is an object with default', () => {
+      expect(getMarkdownString({ default: 'World' })).toBe('World');
+      expect(getMarkdownString({ default: '' })).toBe('');
+    });
+
+    it('should return null for undefined, null, or invalid objects', () => {
+      expect(getMarkdownString(undefined)).toBeNull();
+      expect(getMarkdownString(null)).toBeNull();
+      // @ts-expect-error Testing invalid runtime input
+      expect(getMarkdownString({})).toBeNull();
+      // @ts-expect-error Testing invalid runtime input
+      expect(getMarkdownString(123)).toBeNull();
+    });
+  });
+
   describe('parseInline', () => {
     it('should parse plain text', () => {
       const result = parseInline('Hello world');
@@ -42,12 +63,17 @@ describe('markdown utilities', () => {
   });
 
   describe('renderMarkdown', () => {
-    it('should handle null or undefined input', () => {
+    it('should handle null or undefined input and render error message', () => {
       const { container } = render(<>{renderMarkdown(null)}</>);
       expect(container).toHaveTextContent('正在加载数据或数据格式错误...');
 
       const { container: container2 } = render(<>{renderMarkdown(undefined)}</>);
       expect(container2).toHaveTextContent('正在加载数据或数据格式错误...');
+    });
+
+    it('should handle explicit empty strings gracefully', () => {
+      const { container } = render(<div data-testid="wrapper">{renderMarkdown('')}</div>);
+      expect(container.querySelector('[data-testid="wrapper"]')).toBeEmptyDOMElement();
     });
 
     it('should handle an object with default property', () => {
