@@ -27,11 +27,6 @@ const App: FC = () => {
   const [isMemoryOpen, setIsMemoryOpen] = useState(false);
   const handlePrint = () => window.print();
 
-  // Print only the AI Memory contents (print styling is dynamically injected when modal is open)
-  const handlePrintMemory = () => {
-    window.print();
-  };
-
   return (
     <div className={`min-h-screen bg-gray-100 p-4 md:p-8 font-sans print:p-0 print:bg-white relative ${isMemoryOpen ? 'print-memory-mode' : ''}`}>
       {/* 悬浮按钮组 */}
@@ -101,7 +96,7 @@ const App: FC = () => {
             <div className="memory-modal-footer bg-slate-100 p-4 border-t border-slate-200/50 flex justify-between items-center gap-4">
               {/* 打印按钮 */}
               <button 
-                onClick={handlePrintMemory}
+                onClick={handlePrint}
                 className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 px-6 rounded-lg shadow transition-colors cursor-pointer text-sm flex items-center gap-2"
               >
                 <Printer size={16} className="text-blue-400" />
