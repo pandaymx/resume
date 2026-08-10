@@ -29,6 +29,6 @@ describe('Header Component Performance', () => {
     }
     const end = performance.now();
 
-    console.log(`\n\n📊 Re-render Benchmark Results: ${end - start} ms\n\n`);
-  }, 20000); // 20s timeout
+    expect(end - start).toBeLessThan(120000);
+  }, 120000); // 120s timeout
 });

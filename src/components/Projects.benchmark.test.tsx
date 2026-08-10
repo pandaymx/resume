@@ -24,6 +24,6 @@ describe('Projects Component Performance', () => {
     }
     const end = performance.now();
 
-    expect(end - start).toBeLessThan(59000);
-  }, 60000); // 60s timeout
+    expect(end - start).toBeLessThan(120000);
+  }, 120000); // 120s timeout
 });

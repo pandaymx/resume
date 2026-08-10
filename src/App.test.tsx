@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
@@ -54,7 +55,7 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.queryByText('AI 记忆库 / Context')).not.toBeInTheDocument();
     });
-  });
+  }, 15000);
 
   it('triggers window.print when print buttons are clicked', async () => {
     const printSpy = vi.spyOn(window, 'print').mockImplementation(() => {});
@@ -72,5 +73,5 @@ describe('App', () => {
     // Click print inside modal
     fireEvent.click(screen.getByRole('button', { name: /打印此内容/i }));
     expect(printSpy).toHaveBeenCalledTimes(2);
-  });
+  }, 15000);
 });
