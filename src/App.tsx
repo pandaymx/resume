@@ -51,10 +51,10 @@ const App: FC = () => {
       </div>
 
       {/* 简历容器 */}
-      <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none px-8 py-6 md:px-12 md:py-10 print:px-10 print:py-8">
+      <div className="resume-container max-w-[210mm] mx-auto bg-white shadow-2xl rounded-lg overflow-hidden print:shadow-none print:w-full print:rounded-none px-8 py-8 md:px-14 md:py-12 print:px-10 print:py-8">
         <Header profile={data.profile as unknown as Profile} />
 
-        <div className="mt-5 space-y-6">
+        <div className="mt-6 space-y-7">
           <Experience experience={data.experience as unknown as ExperienceItem[]} />
           <Projects projects={data.projects as unknown as ProjectItem[]} />
           <Skills skills={data.skills as unknown as SkillGroup[]} />
